@@ -58,11 +58,11 @@ function Preview() {
             </Card>
 
             <div className='mt-16 flex flex-col items-center space-y-6 text-center'>
-                <h2 className='text-5xl font-chewy'>Are you learning a language?</h2>
-                <p className='max-w-md text-xl text-(--gray)'>
+                <h2 className='text-3xl sm:text-4xl md:text-5xl font-chewy'>Are you learning a language?</h2>
+                <p className='max-w-md text-lg md:text-xl text-(--gray)'>
                     GetWords is the simple place to gather everything you're learning, word by word.
                 </p>
-                <Button className='cursor-pointer rounded-full bg-accent px-10 py-6 text-xl text-primary shadow-[0_6px_0_0_#c95a32] transition-transform duration-150 hover:bg-accent'>
+                <Button className='cursor-pointer rounded-full bg-accent px-8 md:px-10 py-5 md:py-6 text-lg md:text-xl text-primary shadow-[0_6px_0_0_#c95a32] transition-transform duration-150 hover:bg-accent'>
                     Start free
                 </Button>
             </div>

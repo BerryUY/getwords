@@ -24,7 +24,7 @@ const cards = [
 
 function Cards() {
   return (
-    <div className='grid grid-cols-3 max-w-280 gap-6 mt-20 mx-auto'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-280 gap-6 mt-20 mx-6 md:mx-auto'>
       {cards.map((card) => (
         <Card
           key={card.title}
