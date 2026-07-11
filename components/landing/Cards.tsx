@@ -18,7 +18,7 @@ const cards = [
     icon: SparklesIcon,
     title: "Practice with AI generated quizzes",
     description: "Review your own words with questions automatically created from your list.",
-    badge: "Próximamente",
+    badge: "Coming soon",
   },
 ]
 
