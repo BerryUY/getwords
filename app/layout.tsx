@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Chewy, Figtree, Stack_Sans_Headline } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ClerkProvider } from '@clerk/nextjs'
 
 const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
 
@@ -38,11 +39,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={cn("dark", "h-full", "antialiased", geistSans.variable, geistMono.variable, stackSansHeadline.variable, chewy.variable, "font-sans", figtree.variable)}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
-    </html>
+    <ClerkProvider>
+      <html
+        lang="en"
+        className={cn("dark", "h-full", "antialiased", geistSans.variable, geistMono.variable, stackSansHeadline.variable, chewy.variable, "font-sans", figtree.variable)}
+      >
+        <body className="min-h-full flex flex-col">{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
