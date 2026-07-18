@@ -13,13 +13,14 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";
 import { selectCategories } from "@/db/queries/categories";
+import { toast } from "sonner";
 
 type Category = {
-  id: number,
-  userId: string,
-  name: string,
-  createdAt: Date,
-}
+  id: number;
+  userId: string;
+  name: string;
+  createdAt: Date;
+};
 
 function AddWord() {
   const [word, setWord] = useState("");
@@ -28,11 +29,12 @@ function AddWord() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryId, setCategoryId] = useState<number | null>(null);
   const [addingCategory, setAddingCategory] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getCategories = async () => {
       // Call the API
-      const response = await fetch("/api/categories")
+      const response = await fetch("/api/categories");
       const data = await response.json();
       setCategories(data);
     };
@@ -42,14 +44,26 @@ function AddWord() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Call the API
-    const response = await fetch("/api/words", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ word, definition, addCategory, categoryId }),
-    });
+    setLoading(true);
 
-    const data = await response.json();
+    // Call the API
+    try {
+      const response = await fetch("/api/words", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ word, definition, addCategory, categoryId }),
+      });
+
+      const data = await response.json();
+
+      setLoading(false);
+      toast.success("Word added to your dictionary");
+    } catch (err) {
+      toast.error("Error adding a word");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -80,7 +94,7 @@ function AddWord() {
             />
           ) : (
             <Select
-              value={categoryId !== null ? String(categoryId) : undefined}
+              value={categoryId !== null ? String(categoryId) : ""}
               onValueChange={(val) => {
                 if (val === "add-new") {
                   setAddingCategory(true);

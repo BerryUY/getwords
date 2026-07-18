@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Chewy, Figtree, Stack_Sans_Headline } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Chewy,
+  Figtree,
+  Stack_Sans_Headline,
+} from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ClerkProvider } from '@clerk/nextjs'
+import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner"
 
-const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
+const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +33,12 @@ const stackSansHeadline = Stack_Sans_Headline({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
   variable: "--font-stack-sans",
-})
+});
 
 export const metadata: Metadata = {
   title: "GetWords | Your personal dictionary",
-  description: "Save words you don't know, define them in your own way, and practice them later with AI-generated quizzes.",
+  description:
+    "Save words you don't know, define them in your own way, and practice them later with AI-generated quizzes.",
 };
 
 export default function RootLayout({
@@ -42,9 +50,22 @@ export default function RootLayout({
     <ClerkProvider>
       <html
         lang="en"
-        className={cn("dark", "h-full", "antialiased", geistSans.variable, geistMono.variable, stackSansHeadline.variable, chewy.variable, "font-sans", figtree.variable)}
+        className={cn(
+          "dark",
+          "h-full",
+          "antialiased",
+          geistSans.variable,
+          geistMono.variable,
+          stackSansHeadline.variable,
+          chewy.variable,
+          "font-sans",
+          figtree.variable,
+        )}
       >
-        <body className="min-h-full flex flex-col">{children}</body>
+        <body className="min-h-full flex flex-col">
+          {children}
+          <Toaster position="top-center" />
+        </body>
       </html>
     </ClerkProvider>
   );
