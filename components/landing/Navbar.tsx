@@ -3,6 +3,7 @@ import Logo from "next/image";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Github01Icon } from "@hugeicons/core-free-icons";
+import { SignInButton } from "@clerk/nextjs"
 
 function Navbar() {
   return (
@@ -22,9 +23,11 @@ function Navbar() {
           </a>
         </li>
         <li>
+        <SignInButton>
           <Button className="px-6 md:px-10 py-4 md:py-5.5 text-base md:text-xl cursor-pointer">
             Sign in
           </Button>
+        </SignInButton>
         </li>
       </div>
     </ul>

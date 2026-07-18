@@ -7,7 +7,7 @@ import Preview from "@/components/landing/Preview";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { HeartIcon } from "@hugeicons/core-free-icons";
-import { SignInButton, SignUpButton, useAuth } from '@clerk/nextjs';
+import { SignUpButton, useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
