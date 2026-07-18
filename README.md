@@ -149,7 +149,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 ---
 
-## 📖 API Routes
+## API Routes
 
 | Method | Route          | Description                    |
 |--------|----------------|---------------------------------|
