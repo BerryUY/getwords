@@ -14,7 +14,7 @@ export const words = pgTable('words', {
     id: serial('id').primaryKey(),
     userId: text('user_id').notNull(),
     word: text('word').notNull(),
-    definition: text('word').notNull(),
+    definition: text('definition').notNull(),
     categoryId: integer('category_id').references(() => categories.id),
     createdAt: timestamp('created_at').defaultNow(),
 })
