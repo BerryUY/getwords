@@ -15,7 +15,6 @@ import { useState } from "react";
 
 const categories = [
   { value: "asd", label: "asd" },
-  { value: "asd", label: "asd" },
 ];
 
 function AddWord() {
