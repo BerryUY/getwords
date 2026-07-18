@@ -24,7 +24,7 @@ const chewy = Chewy({
 
 const stackSansHeadline = Stack_Sans_Headline({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700"], // los pesos que viste en la doc
+  weight: ["200", "300", "400", "500", "600", "700"],
   variable: "--font-stack-sans",
 })
 
