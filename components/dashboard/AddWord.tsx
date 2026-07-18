@@ -95,6 +95,8 @@ function AddWord() {
         setWord("")
         setDefinition("")
         setAddCategory("")
+        setCategoryId(null)
+        setAddingCategory(false)
         const res = await fetch("/api/words");
         const updatedWords = await res.json();
         setWords(updatedWords);
@@ -123,6 +125,7 @@ function AddWord() {
         <div className="flex flex-col sm:flex-row gap-3 mb-3">
           <Input
             placeholder="Type a new word..."
+            value={word}
             onChange={(e) => setWord(e.target.value)}
             className="h-11 px-4 focus-visible:border-accent/50 focus-visible:ring-accent/20"
           />
@@ -130,6 +133,7 @@ function AddWord() {
           {addingCategory ? (
             <Input
               placeholder="Type a new category..."
+              value={addCategory}
               onChange={(e) => setAddCategory(e.target.value)}
               className="h-11 px-4 focus-visible:border-accent/50 focus-visible:ring-accent/20"
             />
@@ -167,13 +171,14 @@ function AddWord() {
 
         <Textarea
           placeholder="Your definition here..."
+          value={definition}
           onChange={(e) => setDefinition(e.target.value)}
           className="min-h-28 px-4 focus-visible:border-accent/50 focus-visible:ring-accent/20"
         />
         <div className="flex justify-end pt-2">
           <button
             type="submit"
-            className="cursor-pointer rounded-xl bg-accent text-accent-foreground px-5 py-3 text-sm font-bold shadow-[0_4px_0_0_rgba(0,0,0,0.25)] transition-colors duration-75 active:shadow-[0_1px_0_0_rgba(0,0,0,0.25)] active:translate-y-0.75 hover:bg-amber-800"
+            className="cursor-pointer rounded-xl flex items-center justify-center w-34 bg-accent text-accent-foreground px-5 py-3 text-sm font-bold shadow-[0_4px_0_0_rgba(0,0,0,0.25)] transition-colors duration-75 active:shadow-[0_1px_0_0_rgba(0,0,0,0.25)] active:translate-y-0.75 hover:bg-amber-800"
           >
             {loading === true ? <Spinner/> : "Save changes"}
           </button>
