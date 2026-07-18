@@ -16,17 +16,17 @@ GetWords is a personal vocabulary web app where you save the words you don't kno
 
 ---
 
-## ✨ Features
+## Features
 
-- 📝 **Add words** with your own custom definitions
-- 🗂️ **Organize by category** (exams, work, travel, tech, etc.)
-- 🔐 **Secure authentication** with Clerk
-- ⚡ **Fast and simple UI** built with Tailwind CSS
-- 🤖 **AI-generated quizzes** to practice your saved words *(coming soon)*
+- **Add words** with your own custom definitions
+- **Organize by category** (exams, work, travel, tech, etc.)
+- **Secure authentication** with Clerk
+- **Fast and simple UI** built with Tailwind CSS
+- **AI-generated quizzes** to practice your saved words *(coming soon)*
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer          | Technology                  |
 |----------------|------------------------------|
@@ -48,7 +48,7 @@ getwords/
 ├── app/
 │   ├── api/
 │   │   └── words/
-│   │       └── route.ts        # API route for CRUD operations on words
+│   │       └── route.ts         # API route for CRUD operations on words
 │   ├── dictionary/
 │   │   └── page.tsx             # Main dashboard
 │   ├── layout.tsx               # Root layout with ClerkProvider
@@ -62,20 +62,19 @@ getwords/
 │   │   ├── Cards.tsx
 │   │   └── Preview.tsx
 │   └── ui/                      # shadcn/ui components
-├── src/
-│   └── db/
-│       ├── schema.ts            # Drizzle table definitions
-│       ├── index.ts             # DB connection
-│       └── queries/
-│           └── words.ts         # Query functions (create, read, update, delete)
+├── db/
+│   ├── schema.ts                # Drizzle table definitions
+│   ├── index.ts                 # DB connection
+│   └── queries/
+│       └── words.ts             # Query functions (create, read, update, delete)
 ├── drizzle.config.ts            # Drizzle Kit configuration
-├── proxy.ts                # Clerk route protection
+├── proxy.ts                     # Clerk route protection
 └── globals.css
 ```
 
 ---
 
-## 🗄️ Database Schema
+## Database Schema
 
 **`categories`**
 | Column     | Type      | Description                |
@@ -163,12 +162,12 @@ All routes are protected — they require an authenticated user via Clerk.
 
 ---
 
-## 👤 Author
+### 👤 Author
 
 Made with ❤️ by [Berry](https://github.com/BerryUY)
 
 ---
 
-## 📄 License
+### 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
