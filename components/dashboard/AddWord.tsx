@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";
-import { selectCategories } from "@/db/queries/categories";
 import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner"
 
@@ -41,7 +40,6 @@ function AddWord() {
   const [categoryId, setCategoryId] = useState<number | null>(null);
   const [addingCategory, setAddingCategory] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [words, setWords] = useState<Word[]>([]);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -50,15 +48,6 @@ function AddWord() {
       setCategories(data);
     };
     getCategories();
-  }, []);
-
-  useEffect(() => {
-    const getWords = async () => {
-      const response = await fetch("/api/words");
-      const data = await response.json();
-      setWords(data);
-    };
-    getWords();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -97,9 +86,6 @@ function AddWord() {
         setAddCategory("")
         setCategoryId(null)
         setAddingCategory(false)
-        const res = await fetch("/api/words");
-        const updatedWords = await res.json();
-        setWords(updatedWords);
       }
     } catch (err) {
       toast.error("Error adding a word");
@@ -166,6 +152,7 @@ function AddWord() {
                 </SelectGroup>
               </SelectContent>
             </Select>
+
           )}
         </div>
 

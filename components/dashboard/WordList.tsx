@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useState, useEffect } from "react";
+import { Trash } from "lucide-react";
 
 type Word = {
   id: number;
@@ -30,6 +31,20 @@ function WordList() {
     getWords();
   }, []);
 
+  async function handleDeleteWord(wordId: number) {
+    if (!wordId) return console.error("error deleting word")
+
+    const res = await fetch("/api/words", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: wordId })
+    })
+
+    if (res.ok) {
+      setWords(prev => prev.filter(w => w.id !== wordId))
+    }
+  }
+
   return (
     <>
       {/* Words list */}
@@ -48,6 +63,7 @@ function WordList() {
               <span className="shrink-0 self-start rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent whitespace-nowrap">
                 {word.category?.name ?? "sin categoria"}
               </span>
+            <Trash onClick={() => handleDeleteWord(word.id)} className="cursor-pointer text-red-600/80 bg-red-800/30 p-1 rounded-sm hover:bg-red-800/80 transition-colors hover:text-red-600" size={30} />
             </div>
           </li>
         ))}

@@ -2,7 +2,7 @@ import { createWord } from "@/db/queries/words";
 import { insertNewCategory } from "@/db/queries/categories";
 import { selectWords } from "@/db/queries/words";
 import { auth } from "@clerk/nextjs/server"
-
+import { deleteWord } from "@/db/queries/words";
 
 export async function POST(req: Request) {
 
@@ -42,4 +42,22 @@ export async function GET(req: Request) {
   const words = await selectWords(userId)
 
   return Response.json(words)
+}
+
+export async function DELETE(req: Request) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  const { id } = await req.json();
+
+  if (!id) {
+    return Response.json({ error: "Word ID is required" }, { status: 400 })
+  }
+  
+  await deleteWord(userId, id)
+
+  return Response.json({ success: true })
 }
