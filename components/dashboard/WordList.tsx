@@ -29,7 +29,11 @@ type Word = {
   createdAt: Date;
 };
 
-function WordList() {
+type WordListProps = {
+  categoryActive: number | null;
+};
+
+function WordList({ categoryActive }: WordListProps) {
   const [words, setWords] = useState<Word[]>([]);
 
   useEffect(() => {
@@ -55,11 +59,15 @@ function WordList() {
     }
   }
 
+  const filteredWords = categoryActive
+    ? words.filter((w) => w.categoryId === categoryActive)
+    : words;
+
   return (
     <>
       {/* Words list */}
       <ul className="mt-8 space-y-3 max-w-3xl">
-        {words.map((word) => (
+        {filteredWords.map((word) => (
           <li
             key={word.id}
             className="rounded-xl border border-border/60 bg-card/80 p-4 shadow-sm transition-all duration-200 hover:border-accent/30 hover:shadow-md"
@@ -77,36 +85,33 @@ function WordList() {
                 {word.category?.name ?? "sin categoria"}
               </span>
               <Dialog>
-                <form>
-                  <DialogTrigger
-                    className="cursor-pointer"
-                    render={
-                      <Trash
-                        className="text-red-600/80 bg-red-800/30 p-1 rounded-sm hover:bg-red-800/80 transition-colors hover:text-red-600"
-                        size={30}
-                      />
-                    }
-                  />
-                  <DialogContent className="sm:max-w-sm">
-                    <DialogHeader>
-                      <DialogTitle>Are you sure?</DialogTitle>
-                      <DialogDescription>
-                        You will delete the selected word.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <DialogClose
-                      render={
-                        <Button
-                          onClick={() => handleDeleteWord(word.id)}
-                          className="cursor-pointer bg-red-800 text-white hover:bg-red-700 transition-colors"
-                        >
-                          Delete word
-                        </Button>
-                      }
-                    />
-                  </DialogContent>
-                </form>
-              </Dialog>
+  {/* Pasamos un <button> real o usamos render con un button */}
+  <DialogTrigger render={<button type="button" className="cursor-pointer p-1 rounded-sm text-red-600/80 bg-red-800/30 hover:bg-red-800/80 transition-colors hover:text-red-600" />}>
+    <Trash size={20} />
+  </DialogTrigger>
+
+  <DialogContent className="sm:max-w-sm">
+    <DialogHeader>
+      <DialogTitle>Are you sure?</DialogTitle>
+      <DialogDescription>
+        You will delete the selected word.
+      </DialogDescription>
+    </DialogHeader>
+
+    <div className="flex justify-end gap-3 mt-4">
+      <DialogClose 
+        render={
+          <Button 
+            onClick={() => handleDeleteWord(word.id)} 
+            className="cursor-pointer bg-red-800 text-white hover:bg-red-700 transition-colors"
+          />
+        }
+      >
+        Delete word
+      </DialogClose>
+    </div>
+  </DialogContent>
+</Dialog>
             </div>
           </li>
         ))}

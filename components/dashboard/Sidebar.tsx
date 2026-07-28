@@ -10,10 +10,14 @@ type Category = {
   createdAt: Date;
 };
 
-function Sidebar() {
+type SidebarProps = {
+  categoryActive: number | null
+  onCategoryActive: (id: number | null) => void
+}
+
+function Sidebar({ categoryActive, onCategoryActive }: SidebarProps) {
 
   const [categories, setCategories] = useState<Category[]>([])
-  const [categoryActive, setCategoryActive] = useState<number | null>(null)
 
   useEffect(() => {
     const getCategories = async () => {
@@ -41,10 +45,9 @@ function Sidebar() {
         <nav>
           <ul className="space-y-2">
             {categories.map((category) => (
-              <li key={category.name}>
+              <li key={category.id}>
                 <a
-                  onClick={() => setCategoryActive(category.id)}
-                  href="#"
+                  onClick={() => onCategoryActive?.(category.id)}
                   className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-200 ${
                     categoryActive === category.id
                       ? 'bg-accent/15 text-accent shadow-sm ring-1 ring-accent/20'
